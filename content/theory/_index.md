@@ -5,57 +5,60 @@ weight: 2
 
 # The Theory Behind Karma
 
-**Infrastructure as Consequence** means that what you deploy is not just the result of a plan — it’s the outcome of everything that came before.  
+**Infrastructure as Consequence** means that what you deploy is not just the result of a plan — it's the outcome of everything that came before.
+
 Karma is built on the idea that infrastructure can be:
 
 - Described as a graph of interconnected objects  
 - Shaped by lineage, not static templates  
 - Modified intentionally, not drifted silently  
-- Observed and re-evaluated, not just provisioned once
+- Observed and re-evaluated continuously, not just provisioned once
 
 ---
 
 ## Graph-Based Thinking
 
-Karma encourages you to model infrastructure as a **graph**, where:
+Karma encourages you to model infrastructure as a **runtime graph**, where:
 
 - Each node represents a declarative component
-- Edges define runtime dependencies, not static file includes
-- Nodes are aware of their lineage, enabling change tracking and auditability
+- Edges define runtime dependencies — not file-level includes
+- Relationships are stored and queried in Amazon Neptune
 
 This makes it easier to:
 
 - Visualize how infrastructure is composed  
 - Understand the blast radius of a change  
+- Propagate updates intentionally, based on real dependencies  
 - Reroute or override behavior in specific contexts (e.g., QA vs. PROD)
 
 ---
 
 ## Consequence, Not Just State
 
-Traditional Infrastructure as Code (IaC) often models desired state and reconciles toward it.
+Traditional Infrastructure as Code (IaC) tools model desired state and reconcile toward it.
 
-Karma introduces the idea of **consequence** — not just "what do we want", but "how did we get here?"
+Karma introduces the idea of **consequence** — not just "what should exist", but "how did we get here?"
 
-- Every deployment has context: who triggered it, what config changed, what dependencies it resolves  
-- This makes rollback, testing, and branching cleaner and more robust  
-- Each object is self-describing and self-validating, with testable inputs and traceable outcomes
+- Every deployment has context: what changed, who triggered it, what dependencies it resolves  
+- This enables safer rollback, more meaningful testing, and auditable infrastructure history  
+- Each component is self-describing and testable, with traceable lineage and reproducible behavior
 
 ---
 
 ## The Object-Oriented Layer
 
-Each Karma component behaves like an object:
+Each Karma component behaves like a smart object:
 
 - It has inputs and outputs  
-- It can reference other objects (by nickname or identity)  
-- It can inherit behavior or override parts in context  
+- It can reference other components by nickname  
+- It can inherit behavior or override configuration in context  
+- It exists as a node in a graph, not a chunk of YAML or JSON
 
-This allows reuse across environments without duplicating logic or configuration files.
+This allows for reuse, composability, and environment-specific behavior without duplication.
 
 ---
 
 ## Learn More
 
-Read about how this model opens the door to analysis, modeling, and intelligent infrastructure in  
-[Data Science Implications](/theory/data-science/)
+Read how Karma’s architecture enables modeling, simulation, and intelligent automation in  
+[Data Science Implications →](/theory/data-science/)
