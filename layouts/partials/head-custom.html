@@ -1,0 +1,17 @@
+<!-- Theme-aware favicon -->
+<link id="favicon" rel="icon" href="/assets/logo/favicon-light.png" type="image/png">
+<link rel="icon" href="/assets/logo/favicon-dark.png" type="image/png" media="(prefers-color-scheme: dark)">
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const favicon = document.getElementById("favicon");
+    const scheme = window.matchMedia("(prefers-color-scheme: dark)");
+    function updateFavicon(e) {
+      favicon.href = e.matches
+        ? "/assets/logo/favicon-dark.png"
+        : "/assets/logo/favicon-light.png";
+    }
+    updateFavicon(scheme);
+    scheme.addEventListener("change", updateFavicon);
+  });
+</script>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+  <head>
+    {{ partial "head.html" . }}
+    {{ partial "head-custom.html" . }}
+  </head>
+  <body>
+    {{ partial "header.html" . }}
+    <main class="flex justify-between">
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+    {{ partial "search.html" . }}
+  </body>
+</html>

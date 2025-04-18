@@ -3,10 +3,15 @@ title = "UseKarma"
 theme = "hugo-book"
 languageCode = "en-us"
 defaultContentLanguage = "en"
+enableRobotsTXT = true
+
 
 [params]
   BookTheme = "auto" # "light", "dark", or "auto"
-  BookLogo = "assets/logo/logo-128x128.png"
+  BookLogo = "assets/logo/usekarma_light_128x128.png"
+  BookFavicon = "assets/logo/favicon-light.png"
+  BookToC = true
+  BookSection = "*"
 
 [markup]
   [markup.goldmark.renderer]
