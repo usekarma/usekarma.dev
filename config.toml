@@ -1,0 +1,13 @@
+baseURL = "https://usekarma.dev/"
+title = "UseKarma"
+theme = "hugo-book"
+languageCode = "en-us"
+defaultContentLanguage = "en"
+
+[params]
+  BookTheme = "auto" # "light", "dark", or "auto"
+  BookLogo = "assets/logo/logo-128x128.png"
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true  # Allows raw HTML in markdown

@@ -1,0 +1,39 @@
+# Hugo output
+/public/
+/resources/
+/hugo_stats.json
+
+# Hugo cache
+/.hugo_build.lock
+
+# Build artifacts (from Netlify, Cloudflare, etc.)
+/dist/
+/_publish/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor/project files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.bak
+
+# Node modules (if using npm for scripts/themes)
+/node_modules/
+
+# Log files
+*.log
+
+# Temp
+*.tmp
+*.temp
+
+# Optional: exclude local environment vars
+.env
+.env.*
+
+# Allow Hugo theme submodule
+!themes/hugo-book
