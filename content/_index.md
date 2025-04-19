@@ -7,7 +7,18 @@ weight: 1
 
 **Infrastructure as Consequence.**
 
-Karma is an experimental open source system for modeling and managing infrastructure as modular, object-oriented components — where each deployment step is shaped by what came before.
+<p style="display: flex; align-items: center; gap: 0.5em;">
+  <img
+    class="theme-switch-logo"
+    src="/assets/logo/usekarma_light_300.png"
+    data-light="/assets/logo/usekarma_light_300.png"
+    data-dark="/assets/logo/usekarma_dark_300.png"
+    style="width: 128px; height: 128px;"
+    alt="UseKarma logo">
+  <span>
+    Karma is an experimental open source system for modeling and managing infrastructure as modular, object-oriented components — where each deployment step is shaped by what came before.
+  </span>
+</p>
 
 Rather than building environments top-down, Karma encourages config-driven systems that evolve like a graph — each node connected to its lineage, and each change traceable to its origin.
 
@@ -60,3 +71,5 @@ Karma is built on top of [Adage](https://github.com/tstrall/adage), a configurat
 This project is in early development.  
 Follow progress on [GitHub →](https://github.com/usekarma)  
 Or dive deeper into the [core theory behind Karma →](/theory/)
+
+{{< logo-switch-script >}}

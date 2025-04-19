@@ -5,7 +5,18 @@ weight: 99
 
 # Next Steps
 
-This page outlines upcoming topics and expansions for the Karma documentation site. These pages will evolve into full entries but are currently gathered here as a shared roadmap and reference.
+<p style="display: flex; align-items: center; gap: 0.5em;">
+  <img
+    class="theme-switch-logo"
+    src="/assets/logo/usekarma_light_300.png"
+    data-light="/assets/logo/usekarma_light_300.png"
+    data-dark="/assets/logo/usekarma_dark_300.png"
+    style="width: 128px; height: 128px;"
+    alt="UseKarma logo">
+  <span>
+    <b>Upcoming topics and expansions for Karma</b>
+  </span>
+</p>
 
 ---
 
@@ -97,3 +108,4 @@ poetry run pytest
 This page will evolve as implementation progresses.
 If you're contributing or extending Karma, these are the building blocks ahead.
 
+{{< logo-switch-script >}}

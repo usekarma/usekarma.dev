@@ -12,6 +12,7 @@ enableRobotsTXT = true
   BookFavicon = "assets/logo/favicon-light.png"
   BookToC = true
   BookSection = "*"
+  BookPostScript = "docs/inject-footer.html"
 
 [markup]
   [markup.goldmark.renderer]

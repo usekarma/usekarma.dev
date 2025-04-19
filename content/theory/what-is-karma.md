@@ -5,8 +5,21 @@ weight: 1
 
 # What Is Karma?
 
-> **TL;DR**  
-> Karma is a system for defining, deploying, and managing infrastructure components as graph-aware, testable units — using Git and Parameter Store as the connective tissue between intent, deployment, and runtime state.  
+
+<p style="display: flex; align-items: center; gap: 0.5em;">
+  <img
+    class="theme-switch-logo"
+    src="/assets/logo/usekarma_light_300.png"
+    data-light="/assets/logo/usekarma_light_300.png"
+    data-dark="/assets/logo/usekarma_dark_300.png"
+    style="width: 128px; height: 128px;"
+    alt="UseKarma logo">
+  <span>
+    <b>TL;DR</b><br/>Karma is a system for defining, deploying, and managing infrastructure components as graph-aware, testable units — using Git and Parameter Store as the connective tissue between intent, deployment, and runtime state.
+  </span>
+</p>
+
+
 > It creates an environment where infrastructure becomes more observable, auditable, and adaptive — without losing control.
 
 ---
@@ -107,3 +120,5 @@ Karma is an infrastructure runtime — focused on structure, traceability, and c
 ---
 
 [← Back to Theory](/theory/)
+
+{{< logo-switch-script >}}

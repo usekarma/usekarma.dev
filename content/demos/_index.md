@@ -5,9 +5,21 @@ weight: 3
 
 # Karma Demos
 
-This section showcases how Karma works in real-world scenarios by walking through a complete deployment example — from configuration to runtime switchover.
+<p style="display: flex; align-items: center; gap: 0.5em;">
+  <img
+    class="theme-switch-logo"
+    src="/assets/logo/usekarma_light_300.png"
+    data-light="/assets/logo/usekarma_light_300.png"
+    data-dark="/assets/logo/usekarma_dark_300.png"
+    style="width: 128px; height: 128px;"
+    alt="UseKarma logo">
+  <span>
+    This section showcases how Karma works in real-world scenarios by walking through a complete deployment example — from configuration to runtime switchover.
+    <br/>Each demo is designed to highlight a key idea behind Karma:  
+  </span>
+</p>
 
-Each demo is designed to highlight a key idea behind Karma:  
+
 **Infrastructure as Consequence** — where each step is derived from prior intent.
 
 ---
@@ -126,3 +138,5 @@ This will:
 ---
 
 Return to the [Theory](/theory/) page to learn why Karma is structured this way.
+
+{{< logo-switch-script >}}

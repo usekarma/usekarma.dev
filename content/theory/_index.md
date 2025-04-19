@@ -5,7 +5,19 @@ weight: 2
 
 # The Theory Behind Karma
 
-**Infrastructure as Consequence** means that what you deploy is not just the result of a plan — it's the outcome of everything that came before.
+<p style="display: flex; align-items: center; gap: 0.5em;">
+  <img
+    class="theme-switch-logo"
+    src="/assets/logo/usekarma_light_300.png"
+    data-light="/assets/logo/usekarma_light_300.png"
+    data-dark="/assets/logo/usekarma_dark_300.png"
+    style="width: 128px; height: 128px;"
+    alt="UseKarma logo">
+  <span>
+    <b>Infrastructure as Consequence</b> means that what you deploy is not just the result of a plan — it's the outcome of everything that came before.
+  </span>
+</p>
+
 
 Karma is built on the idea that infrastructure can be:
 
@@ -62,3 +74,5 @@ This allows for reuse, composability, and environment-specific behavior without 
 
 Read how Karma’s architecture enables modeling, simulation, and intelligent automation in  
 [Data Science Implications →](/theory/data-science/)
+
+{{< logo-switch-script >}}

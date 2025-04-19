@@ -1,0 +1,36 @@
+<script>
+    (function() {
+      function getCurrentTheme() {
+        const stored = localStorage.getItem("pref-theme");
+        if (stored === "dark" || stored === "light") {
+          return stored;
+        }
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        return prefersDark ? "dark" : "light";
+      }
+    
+      function updateThemeLogos() {
+        const theme = getCurrentTheme();
+        document.querySelectorAll(".theme-switch-logo").forEach(img => {
+          const light = img.dataset.light;
+          const dark = img.dataset.dark;
+          if (light && dark) {
+            const newSrc = theme === "dark" ? dark : light;
+            if (!img.src.includes(newSrc)) {
+              img.src = newSrc;
+            }
+          }
+        });
+      }
+    
+      document.addEventListener("DOMContentLoaded", () => {
+        updateThemeLogos();
+        setTimeout(updateThemeLogos, 300);
+      });
+    
+      window.addEventListener("storage", updateThemeLogos);
+    
+      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateThemeLogos);
+    })();
+    </script>
+    
