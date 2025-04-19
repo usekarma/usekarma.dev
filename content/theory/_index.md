@@ -18,6 +18,7 @@ weight: 2
   </span>
 </p>
 
+![Karma: Infrastructure as Consequence](/img/karma-system.drawio.png)
 
 Karma is built on the idea that infrastructure can be:
 

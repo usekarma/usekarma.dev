@@ -5,8 +5,6 @@ weight: 1
 
 # Karma
 
-**Infrastructure as Consequence.**
-
 <p style="display: flex; align-items: center; gap: 0.5em;">
   <img
     class="theme-switch-logo"
@@ -19,6 +17,10 @@ weight: 1
     Karma is an experimental open source system for modeling and managing infrastructure as modular, object-oriented components — where each deployment step is shaped by what came before.
   </span>
 </p>
+
+**Infrastructure as Consequence.**
+
+![Karma: Infrastructure as Consequence](/img/karma-system.drawio.png)
 
 Rather than building environments top-down, Karma encourages config-driven systems that evolve like a graph — each node connected to its lineage, and each change traceable to its origin.
 

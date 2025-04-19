@@ -5,7 +5,6 @@ weight: 1
 
 # What Is Karma?
 
-
 <p style="display: flex; align-items: center; gap: 0.5em;">
   <img
     class="theme-switch-logo"
@@ -19,6 +18,7 @@ weight: 1
   </span>
 </p>
 
+![Karma: Infrastructure as Consequence](/img/karma-system.drawio.png)
 
 > It creates an environment where infrastructure becomes more observable, auditable, and adaptive — without losing control.
 
