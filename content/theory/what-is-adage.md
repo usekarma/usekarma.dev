@@ -5,6 +5,8 @@ weight: 2
 
 # What is Adage?
 
+> **Karma** is built on [**Adage – a configuration-driven deployment framework**](https://adage.usekarma.dev) for modular infrastructure.
+
 **Adage** is the infrastructure engine behind Karma.  
 
 ![Adage: Infrastructure as Consequence](/img/adage-system-diagram.png)

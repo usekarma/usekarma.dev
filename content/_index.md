@@ -24,6 +24,8 @@ weight: 1
 
 Rather than building environments top-down, Karma encourages config-driven systems that evolve like a graph — each node connected to its lineage, and each change traceable to its origin.
 
+> **Karma** is built on [**Adage – a configuration-driven deployment framework**](https://adage.usekarma.dev) for modular infrastructure.
+
 ---
 
 ## Why Karma?
@@ -64,7 +66,7 @@ Check out the [Demos](/demos/) page for a full walkthrough of a real-world deplo
 
 ## Powered by Adage
 
-Karma is built on top of [Adage](https://github.com/usekarma/adage), a configuration-first deployment framework that combines Terraform, Parameter Store, and Terragrunt to manage real-world AWS infrastructure.
+**Karma** is built on top of  [**Adage – a configuration-driven deployment framework**](https://adage.usekarma.dev) that combines Terraform, Parameter Store, and Terragrunt to manage real-world AWS infrastructure.
 
 ---
 
