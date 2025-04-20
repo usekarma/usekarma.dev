@@ -64,7 +64,7 @@ Check out the [Demos](/demos/) page for a full walkthrough of a real-world deplo
 
 ## Powered by Adage
 
-Karma is built on top of [Adage](https://github.com/tstrall/adage), a configuration-first deployment framework that combines Terraform, Parameter Store, and Terragrunt to manage real-world AWS infrastructure.
+Karma is built on top of [Adage](https://github.com/usekarma/adage), a configuration-first deployment framework that combines Terraform, Parameter Store, and Terragrunt to manage real-world AWS infrastructure.
 
 ---
 

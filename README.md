@@ -2,7 +2,7 @@
 
 This is the source repository for [https://usekarma.dev](https://usekarma.dev).
 
-The site is deployed using the [Adage](https://github.com/tstrall/adage) infrastructure framework and hosted on AWS using S3, CloudFront, Route 53, and ACM. Content is built with Hugo and managed in this repo.
+The site is deployed using the [Adage](https://github.com/usekarma/adage) infrastructure framework and hosted on AWS using S3, CloudFront, Route 53, and ACM. Content is built with Hugo and managed in this repo.
 
 ---
 
@@ -19,7 +19,7 @@ This site introduces the concept and will grow alongside the implementation.
 ## Site Architecture
 
 - Static site generated with [Hugo](https://gohugo.io)
-- Deployed via [Adage’s `serverless-site`](https://github.com/tstrall/aws-iac/tree/main/components/serverless-site) component
+- Deployed via [Adage’s `serverless-site`](https://github.com/usekarma/aws-iac/tree/main/components/serverless-site) component
 - Hosted on AWS with:
   - S3 (for content)
   - CloudFront (for CDN and TLS)
