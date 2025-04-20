@@ -1,6 +1,6 @@
 ---
 title: "Coordinating Change in Karma"
-weight: 7
+weight: 9
 ---
 
 # Coordinating Change in Karma

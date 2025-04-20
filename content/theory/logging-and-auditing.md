@@ -1,6 +1,6 @@
 ---
 title: "Logging and Auditing"
-weight: 8
+weight: 9
 ---
 
 # Logging and Auditing

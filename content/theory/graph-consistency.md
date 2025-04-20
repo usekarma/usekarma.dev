@@ -1,6 +1,6 @@
 ---
 title: "Graph Consistency in Karma"
-weight: 6
+weight: 7
 ---
 
 # Graph Consistency in Karma

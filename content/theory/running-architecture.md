@@ -1,6 +1,6 @@
 ---
 title: "Karma Runtime Architecture"
-weight: 5
+weight: 6
 ---
 
 # Karma Runtime Architecture

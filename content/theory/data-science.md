@@ -1,6 +1,6 @@
 ---
 title: "Data Science Implications"
-weight: 3
+weight: 4
 ---
 
 # Data Science Implications
