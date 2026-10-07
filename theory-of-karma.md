@@ -1,3 +1,5 @@
+> **Exploratory design:** This document describes future directions, not verified runtime capabilities. See [current implementation status](https://github.com/usekarma/karma) and [proof criteria](https://usekarma.dev/theory/adage-proving-ground/). Consequential AWS execution requires explicit human authorization.
+
 # Karma: Infrastructure as Consequence
 
 Karma is an experimental model for building systems where every action or object is shaped by what came before it.

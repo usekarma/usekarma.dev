@@ -3,6 +3,9 @@ title: "Theory"
 weight: 2
 ---
 
+> **Design proposal:** This page preserves exploratory architecture ideas, not verified runtime capabilities. Persistent Neptune integration, Karma CLI/service commands, coordinated changes, and learning systems are not implemented end-to-end in the current source. Read the [implementation status](/theory/what-is-karma/) and [proof criteria](/theory/adage-proving-ground/) first. Consequential AWS execution requires separate human authorization.
+
+
 # The Theory Behind Karma
 
 <p style="display: flex; align-items: center; gap: 0.5em;">
@@ -77,3 +80,9 @@ Read how Karma’s architecture enables modeling, simulation, and intelligent au
 [Data Science Implications →](/theory/data-science/)
 
 {{< logo-switch-script >}}
+
+## Current evidence
+
+- [What is Karma?](/theory/what-is-karma/)
+- [What is Adage?](/theory/what-is-adage/)
+- [Adage proving ground and cost proof](/theory/adage-proving-ground/)

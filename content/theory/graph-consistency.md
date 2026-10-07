@@ -3,6 +3,9 @@ title: "Graph Consistency in Karma"
 weight: 7
 ---
 
+> **Design proposal:** This page preserves exploratory architecture ideas, not verified runtime capabilities. Persistent Neptune integration, Karma CLI/service commands, coordinated changes, and learning systems are not implemented end-to-end in the current source. Read the [implementation status](/theory/what-is-karma/) and [proof criteria](/theory/adage-proving-ground/) first. Consequential AWS execution requires separate human authorization.
+
+
 # Graph Consistency in Karma
 
 When Karma uses Amazon Neptune as its source of truth, the system must ensure that the graph is kept in a consistent and valid state — even as multiple processes or users interact with it.
@@ -51,10 +54,10 @@ If a build process crashes or times out mid-update, Neptune may contain:
 
 ### 3. Eventually Consistent Reads
 
-Neptune defaults to eventual consistency. If you read a node immediately after writing it, you may not see it yet.
+A future graph implementation must specify and test read-after-write behavior for its chosen storage engine, API, and replica topology.
 
 **Solution:**
-- Use `ReadConsistency=QUORUM` for API-facing reads
+- Verify the chosen database API supports the required consistency semantics; no specific Neptune setting is prescribed here
 - Accept eventual consistency for non-critical queries
 
 ---
@@ -66,7 +69,7 @@ Neptune defaults to eventual consistency. If you read a node immediately after w
 | Simultaneous builds    | Use environment-level lock          |
 | Incomplete writes      | In-memory staging + atomic publish |
 | Conflicting updates    | Queue or version change requests   |
-| Flaky reads            | Use QUORUM reads or delay lookups  |
+| Flaky reads            | Test read-after-write behavior and handle stale observations |
 | Rollbacks              | Use batch delete or rebuild logic  |
 
 ---

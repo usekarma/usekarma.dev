@@ -1,50 +1,27 @@
 ---
-title: "What is Adage?"
+title: "What Is Adage?"
 weight: 2
 ---
 
 # What is Adage?
 
-> **Karma** is built on [**Adage – a configuration-driven deployment framework**](https://adage.usekarma.dev) for modular infrastructure.
+**Adage is the configuration-driven AWS infrastructure control model; Karma is its workload and proving ground.**
 
-**Adage** is the infrastructure engine behind Karma.  
+Adage separates infrastructure intent, reusable implementation, and runtime dependency discovery. Its cloud architecture predates the current agent use case: explicit configuration, composable components, Git-controlled changes, and controlled deployment were the original goals. Those choices also make it suitable for agents that inspect, build, verify, plan, and produce evidence.
 
-![Adage: Infrastructure as Consequence](/img/adage-system-diagram.png)
+![Original Adage system diagram](/img/adage-system-diagram.png)
 
-It provides the foundation for deploying modular, environment-aware systems using only declarative configuration.
+## The infrastructure responsibilities
 
----
+- [aws-config](https://github.com/usekarma/aws-config) defines desired component instances and environment bindings.
+- [aws-iac](https://github.com/usekarma/aws-iac) supplies reusable Terraform/Terragrunt implementations.
+- SSM Parameter Store carries published configuration and runtime metadata through predictable paths.
+- Git records intent and changes; IAM and execution controls must enforce authority.
 
-## Why Adage?
+Configuration existence is not proof of approval, and runtime metadata does not replace live inventory. Agents may prepare code, configuration, checks, plans, and evidence. Consequential AWS execution requires explicit human authorization.
 
-Traditional infrastructure-as-code often requires hand-rolled logic and tightly-coupled modules.  
-Adage flips that model by treating infrastructure as **consequence** — deployments are derived from inputs, not orchestrated step-by-step.
+## Where Karma fits
 
-It gives Karma:
+Karma provides concrete event-processing and analysis experiments, along with a real infrastructure context in which to reconcile desired state, observed resources, and actual spend. The agent safeguards under review in the infrastructure repositories are not a finished Karma governance or action engine.
 
-- A graph-like deployment model
-- Declarative config in Git
-- Runtime traceability
-- Controlled switchover between states
-- Support for multi-account AWS orgs out of the box
-
----
-
-## What Does Adage Deploy?
-
-Adage components include:
-
-- S3-backed static websites
-- Lambda-based APIs and automation
-- Aurora PostgreSQL clusters
-- IAM roles, secrets, and policies
-- Certificate validation and DNS
-- Everything Karma depends on
-
----
-
-## Where to Learn More
-
-Visit the Adage documentation at:
-
-[https://adage.usekarma.dev](https://adage.usekarma.dev)
+Read [Adage's canonical story](https://github.com/usekarma/adage), [Adage's documentation website](https://adage.usekarma.dev/), and [Karma's proof criteria](/theory/adage-proving-ground/).

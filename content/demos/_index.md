@@ -3,140 +3,60 @@ title: "Demos"
 weight: 3
 ---
 
-# Karma Demos
+# Karma deployment walkthrough
 
-<p style="display: flex; align-items: center; gap: 0.5em;">
-  <img
-    class="theme-switch-logo"
-    src="/assets/logo/usekarma_light_300.png"
-    data-light="/assets/logo/usekarma_light_300.png"
-    data-dark="/assets/logo/usekarma_dark_300.png"
-    style="width: 128px; height: 128px;"
-    alt="UseKarma logo">
-  <span>
-    This section showcases how Karma works in real-world scenarios by walking through a complete deployment example — from configuration to runtime switchover.
-    <br/>Each demo is designed to highlight a key idea behind Karma:  
-  </span>
-</p>
+This walkthrough illustrates **Adage's configuration-driven deployment model** using the Karma documentation website. It is not evidence of a complete Karma graph engine, autonomous action system, or current live deployment verification.
 
+## 1. Define desired state
 
-**Infrastructure as Consequence** — where each step is derived from prior intent.
+The configuration repository owns environment bindings and component inputs. A site configuration lives under a path such as:
 
----
-
-## Minimal Deployment Walkthrough
-
-This demo deploys a simple Hugo website — `karma-dev` — using:
-
-- A declarative config in JSON
-- Terraform components from the shared `aws-iac` repo
-- Parameter Store for config delivery
-- Controlled promotion to runtime
-
----
-
-### 1. Define the Component Config
-
-The component is defined in your config repo, at:
-
-```
-karma-dev-config/iac/prod/serverless-site/karma-dev.json
+```text
+aws-config/iac/prod/serverless-site/usekarma-dev/config.json
 ```
 
-```json
-{
-  "nickname": "karma-dev",
-  "domain": "usekarma.dev",
-  "runtime": {
-    "bucket": "karma-dev-site",
-    "cloudfront_distribution_id": "EXAMPLE123"
-  }
-}
+Check the actual [configuration repository](https://github.com/usekarma/aws-config) for the selected environment and nickname; examples do not establish an account identity or approval.
+
+## 2. Publish approved configuration
+
+An authorized operator publishes configuration to SSM under a path such as:
+
+```text
+/iac/serverless-site/usekarma-dev/config
 ```
 
-This file is not infrastructure — it’s intent. It describes what the system should be, and Karma will translate that into action.
+SSM publication is an AWS write and can affect later infrastructure changes. Agents may prepare configuration and validation; a human must separately authorize publication.
 
----
+## 3. Plan and deploy infrastructure
 
-### 2. Publish the Config
+The reusable `serverless-site` implementation in [aws-iac](https://github.com/usekarma/aws-iac/tree/main/components/serverless-site) consumes configuration and prepares the AWS resources. Check identity, environment, dependencies, and a relevant plan before an authorized apply.
 
-Use the deployment script to publish the config into SSM Parameter Store:
+Runtime outputs are published separately:
+
+```text
+/iac/serverless-site/usekarma-dev/runtime
+```
+
+Configuration existence is a prerequisite, not proof of safety or approval. Follow the current target branch's [Adage deployment documentation](https://github.com/usekarma/adage/blob/main/deployment/README.md) rather than treating illustrative commands as an execution contract.
+
+## 4. Build and publish website content
+
+In the [website source repository](https://github.com/usekarma/usekarma.dev), build locally:
 
 ```bash
-AWS_PROFILE=dev-iac ./scripts/deploy_config.py \
-  --component serverless-site \
-  --nickname karma-dev
+hugo --minify
 ```
 
-This uploads the JSON to:
+The theme needs Hugo Extended. Confirm the runtime parameter identifies the expected website, content bucket, and CloudFront distribution. Preview the S3 sync, then publish under an explicitly authorized AWS profile. Content publishing updates an existing website; it does not validate a Karma event pipeline or graph backend.
 
-```
-/iac/serverless-site/karma-dev/config
-```
+## What this demonstrates
 
-No Terraform has run yet. The config exists, but nothing is live.
+Desired configuration, infrastructure implementation, and site content have separate responsibilities. Runtime metadata connects deployment outputs to the publishing tool. The model is Adage's; Karma provides the concrete workload and evidence to evaluate it.
 
----
+## Next experiments
 
-### 3. Deploy the Terraform Component
+- [Infrastructure cost reconciliation](/theory/adage-proving-ground/), with no destructive changes.
+- A synthetic event normalization → ClickHouse query demonstration with reproducible inputs and outputs.
+- Persistent graph and coordinated-change experiments only after explicit specifications and verification.
 
-Now that the config exists, the infrastructure can be safely deployed:
-
-```bash
-AWS_PROFILE=dev-iac ./deploy.sh serverless-site karma-dev
-```
-
-This will:
-
-- Read the config from Parameter Store
-- Deploy the S3 bucket and CloudFront distribution
-- Output the deployment status
-
-Everything is traceable: what config was used, what AWS profile was active, and which resources were created.
-
----
-
-### 4. Publish Site Content
-
-If it’s a Hugo site, you can now push content live:
-
-```bash
-AWS_PROFILE=dev-iac ./scripts/publish_site.py --nickname karma-dev
-```
-
-This will:
-
-- Build the Hugo site
-- Upload to the configured S3 bucket
-- Invalidate CloudFront so users see the latest version
-
----
-
-## What This Demonstrates
-
-- Configuration precedes deployment  
-  Karma only allows infrastructure to deploy if the config is present.
-
-- Declarative, auditable history  
-  Config lives in Git. Deployments are shaped by intent, not imperative scripts.
-
-- Modular and repeatable  
-  You can deploy `karma-qa`, `karma-demo`, `karma-prod` with the same infrastructure logic.
-
-- Controlled switchover  
-  Infrastructure can be deployed, validated, and only promoted when explicitly approved.
-
----
-
-## Coming Soon
-
-- Multi-component graph walkthrough (e.g., site + API + auth)
-- Graph visualization for dependencies
-- Automated test validation before switchover
-- Live deployment explorer and changelog tracking
-
----
-
-Return to the [Theory](/theory/) page to learn why Karma is structured this way.
-
-{{< logo-switch-script >}}
+Read [current implementation status](/theory/what-is-karma/) before interpreting the exploratory [theory](/theory/) as working software.

@@ -3,6 +3,9 @@ title: "Logging and Auditing"
 weight: 9
 ---
 
+> **Design proposal:** This page preserves exploratory architecture ideas, not verified runtime capabilities. Persistent Neptune integration, Karma CLI/service commands, coordinated changes, and learning systems are not implemented end-to-end in the current source. Read the [implementation status](/theory/what-is-karma/) and [proof criteria](/theory/adage-proving-ground/) first. Consequential AWS execution requires separate human authorization.
+
+
 # Logging and Auditing
 
 Karma acts as a graph-aware coordinator for infrastructure components — but it also serves as a **system of record**.

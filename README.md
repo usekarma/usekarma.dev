@@ -1,54 +1,39 @@
 # usekarma.dev
 
-This is the source repository for [https://usekarma.dev](https://usekarma.dev).
+Source for [usekarma.dev](https://usekarma.dev), the public introduction to **Karma**: an experimental event-driven system for understanding change and a workload for proving [Adage's infrastructure control model](https://github.com/usekarma/adage).
 
-The site is deployed using the [Adage](https://github.com/usekarma/adage) infrastructure framework and hosted on AWS using S3, CloudFront, Route 53, and ACM. Content is built with Hugo and managed in this repo.
+Karma's implementation evidence lives in [usekarma/karma](https://github.com/usekarma/karma). Normalization source, contracts, and ClickHouse SQL exist; graph handlers, prediction jobs, and action examples include mocks or placeholders. The website distinguishes those artifacts from proposed Neptune/CLI/service capabilities and the infrastructure cost experiment still being validated.
 
----
+## Site architecture
 
-## What Is Karma?
+The site uses Hugo with the Hugo Book theme and is hosted on existing AWS S3/CloudFront infrastructure deployed through Adage. Preserve the current theme, routes, logos, and theoretical documentation while keeping capability claims aligned with source evidence.
 
-**Karma** is an experimental system for modeling infrastructure as modular, composable objects.
+## Build
 
-It’s based on the principle that each deployment step depends on what came before — like a chain of configuration and consequence. Karma encourages explicit modeling of dependencies and structure using open source tools.
-
-This site introduces the concept and will grow alongside the implementation.
-
----
-
-## Site Architecture
-
-- Static site generated with [Hugo](https://gohugo.io)
-- Deployed via [Adage’s `serverless-site`](https://github.com/usekarma/aws-iac/tree/main/components/serverless-site) component
-- Hosted on AWS with:
-  - S3 (for content)
-  - CloudFront (for CDN and TLS)
-  - Route 53 (for DNS)
-  - ACM (for HTTPS)
-
----
-
-## Deployment
-
-The site is configured in [`karma-dev-config`](https://github.com/usekarma/karma-dev-config), and can be deployed using:
+Hugo Extended is required by the theme's SCSS pipeline.
 
 ```bash
-AWS_PROFILE=prod-karma ./scripts/publish_site.py --nickname usekarma-dev
+git submodule update --init --recursive
+hugo --minify
 ```
 
-This builds the Hugo site, uploads it to S3, and triggers a CloudFront cache invalidation using settings stored in Parameter Store.
+Review generated content, internal links, and assets before publishing. `content/theory/adage-proving-ground.md` defines the cost experiment. The $1.12/month target covers the intended minimal state of strall.com and usekarma.dev, not the full historical Karma stack or adage.usekarma.dev.
 
----
+## Publish to the existing site
 
-## Future Plans
+Publishing requires an authenticated AWS profile and authorization for the website update. Confirm account identity and `/iac/serverless-site/usekarma-dev/runtime` against the intended domain/bucket/distribution before executing.
 
-- Publish visual documentation and architecture diagrams
-- Explore drag-and-drop interfaces for system composition
-- Share Karma as a library of composable infrastructure patterns
-- Provide examples for Terraform, Python, and data pipeline systems
+The publisher is in this repository:
 
----
+```bash
+AWS_PROFILE=<confirmed-profile> AWS_REGION=<confirmed-region> \
+python3 scripts/publish_site.py usekarma-dev
+```
+
+It builds Hugo, reads SSM runtime metadata, syncs content to S3 with `--delete`, and invalidates CloudFront. Review the target and file deletions before publishing. Its current `--dry-run` still creates a CloudFront invalidation, so it is not a fully read-only validation command. Use a direct `aws s3 sync ... --dryrun` for an upload preview.
+
+This site-content workflow does not apply/destroy infrastructure, establish production readiness, or complete the billing proof.
 
 ## License
 
-This project is licensed under the [Apache License 2.0](./LICENSE).
+[Apache 2.0](LICENSE).

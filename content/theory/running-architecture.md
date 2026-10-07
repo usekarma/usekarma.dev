@@ -3,6 +3,9 @@ title: "Karma Runtime Architecture"
 weight: 6
 ---
 
+> **Design proposal:** This page preserves exploratory architecture ideas, not verified runtime capabilities. Persistent Neptune integration, Karma CLI/service commands, coordinated changes, and learning systems are not implemented end-to-end in the current source. Read the [implementation status](/theory/what-is-karma/) and [proof criteria](/theory/adage-proving-ground/) first. Consequential AWS execution requires separate human authorization.
+
+
 # Karma Runtime Architecture
 
 Karma is a graph-based system for managing infrastructure components, configurations, and runtime state. This page explains how Karma operates under the hood — what components exist, how they behave in different modes, and when each mode makes sense.

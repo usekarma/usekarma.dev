@@ -3,122 +3,32 @@ title: "What Is Karma?"
 weight: 1
 ---
 
-# What Is Karma?
+# What is Karma?
 
-<p style="display: flex; align-items: center; gap: 0.5em;">
-  <img
-    class="theme-switch-logo"
-    src="/assets/logo/usekarma_light_300.png"
-    data-light="/assets/logo/usekarma_light_300.png"
-    data-dark="/assets/logo/usekarma_dark_300.png"
-    style="width: 128px; height: 128px;"
-    alt="UseKarma logo">
-  <span>
-    <b>TL;DR</b><br/>Karma is a system for defining, deploying, and managing infrastructure components as graph-aware, testable units — using Git and Parameter Store as the connective tissue between intent, deployment, and runtime state.
-  </span>
-</p>
+Karma is an experimental event-driven system for understanding change. It explores how normalized events, state, dependencies, and outcomes can support observability, analysis, and evidence-based decisions.
 
-![Karma: Infrastructure as Consequence](/img/karma-system.drawio.png)
+**Adage defines the infrastructure control model. Karma provides the workload and proving ground.** Desired-state configuration, Terraform components, and SSM discovery belong to Adage; Karma experiments with the observations and analysis that can demonstrate whether the model works in practice.
 
-> It creates an environment where infrastructure becomes more observable, auditable, and adaptive — without losing control.
+## Source, prototype, and proposal
 
----
+| Capability | Evidence | Status |
+| --- | --- | --- |
+| Event/action envelopes | [Schemas](https://github.com/usekarma/karma/tree/main/contracts) and [topic conventions](https://github.com/usekarma/karma/blob/main/actions/topics.md) | Defined in source; universal enforcement is not established. |
+| CDC normalization | [Kafka Streams implementation](https://github.com/usekarma/karma/tree/main/normalizers/mongo-cdc-clickhouse-kstreams) and [Python source](https://github.com/usekarma/karma/blob/main/normalizers/mongo-cdc-clickhouse/src/normalizer.py) | Code and mappings exist; end-to-end integration requires verification. |
+| State and latency analysis | [ClickHouse SQL](https://github.com/usekarma/karma/tree/main/sinks/clickhouse/sql) | Definitions exist; live processing is not certified here. |
+| Graph API | [Lambda handlers](https://github.com/usekarma/karma/tree/main/lambdas) | Mock graph responses and logging stub; no persistent graph integration. |
+| Prediction/deviation | [Job source](https://github.com/usekarma/karma/tree/main/entropy/jobs) | Placeholder code and notes. |
+| Action execution | [Examples](https://github.com/usekarma/karma/tree/main/actions/examples) | Pseudocode placeholders; no verified action engine. |
+| Neptune graph, CLI/service, coordinated changes | [Theory](/theory/) | Design proposals, not established runtime capabilities. |
 
-**Karma is a configuration-driven deployment system that models infrastructure as a live graph of traceable, testable components.**
+## Intended event path
 
-Each component is defined by versioned config in Git and Parameter Store, then deployed using Terraform. The result is a dynamic system where infrastructure evolves as a consequence of intent — not just execution.
+Raw CDC → normalization → `events.normalized` → ClickHouse event history and state/latency views → analysis → proposed actions.
 
----
+Normalizer and SQL source exist. Source/sink wiring must be supplied and tested; detection and execution stages are incomplete. The API prototype is not automatically connected to this streaming path.
 
-## Core Concepts
+## Practical next steps
 
-### 1. Git Defines Intent
+Use the [source README](https://github.com/usekarma/karma) for component-specific setup. The Compose file starts supporting Kafka/ZooKeeper and ClickHouse services; it does not deploy a complete application. There is no root Poetry application or finished Karma CLI in this checkout.
 
-Each component (like a static site or a VPC) is represented by a small JSON file in Git.
-
-```json
-{
-  "nickname": "karma-dev",
-  "domain": "usekarma.dev",
-  "cloudfront_aliases": ["www.usekarma.dev"]
-}
-```
-
-This is not a template. It’s declarative intent.
-
----
-
-### 2. Parameter Store Becomes the Backbone
-
-The config is published to AWS Parameter Store under paths like:
-
-```
-/iac/serverless-site/karma-dev/config
-```
-
-Terraform reads this as its input — not from local variables — and deploys infrastructure accordingly.
-
----
-
-### 3. Terraform Manages Provisioning
-
-Each component uses a shared Terraform module (or Terragrunt wrapper) that dynamically loads config from Parameter Store.
-
-This makes infrastructure:
-
-- Deployable independently  
-- Versioned and environment-aware  
-- Fully driven by external configuration
-
----
-
-### 4. Outputs Are Captured as Runtime State
-
-After deployment, Terraform publishes runtime outputs to a parallel SSM path:
-
-```
-/iac/serverless-site/karma-dev/runtime
-```
-
-These runtime values reflect what was actually deployed — not just what was planned — and are safe for other components to consume.
-
----
-
-### 5. Karma Builds and Stores the Graph
-
-Karma consumes both `/config` and `/runtime` values to build a graph of component relationships, then stores that graph in Amazon Neptune.
-
-- **Nodes** represent components
-- **Edges** represent declared or inferred dependencies
-- The graph can be queried, visualized, analyzed, or used to coordinate change
-
-This makes Karma a living model of the system — not just a deployment tool.
-
----
-
-## The Graph
-
-Karma’s graph model enables:
-
-- Dependency-aware change planning  
-- Safe reconfiguration of shared resources  
-- Visual exploration of system lineage  
-- Runtime-aware system design  
-
-The graph becomes a shared source of truth — not just for deployments, but for coordination, policy, and observability.
-
----
-
-## What Karma Is *Not*
-
-- ❌ Not a static templating system  
-- ❌ Not just a Terraform wrapper  
-- ❌ Not dependent on any particular UI or deployment pipeline  
-
-Karma is an infrastructure runtime — focused on structure, traceability, and controlled evolution.
-
----
-
-[← Back to Theory](/theory/)
-
-{{< logo-switch-script >}}
+First validate one synthetic event path and a queryable result. Separately complete the [infrastructure cost proof](/theory/adage-proving-ground/). Larger graph and automation claims should follow observed evidence.

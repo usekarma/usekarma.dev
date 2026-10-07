@@ -1,3 +1,5 @@
+> **Exploratory design:** This document describes future directions, not verified runtime capabilities. See [current implementation status](https://github.com/usekarma/karma) and [proof criteria](https://usekarma.dev/theory/adage-proving-ground/). Consequential AWS execution requires explicit human authorization.
+
 # Karma and Machine Learning: Graphs, Context, and Control
 
 The design of Karma as a modular, object-oriented infrastructure model has a natural synergy with machine learning. By treating infrastructure, configuration, and data systems as nodes in a graph, Karma creates an environment where systems are not only composable, but also analyzable and adaptable — ideal conditions for intelligent automation.

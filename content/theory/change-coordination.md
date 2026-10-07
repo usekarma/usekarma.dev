@@ -3,6 +3,9 @@ title: "Coordinating Change in Karma"
 weight: 9
 ---
 
+> **Design proposal:** This page preserves exploratory architecture ideas, not verified runtime capabilities. Persistent Neptune integration, Karma CLI/service commands, coordinated changes, and learning systems are not implemented end-to-end in the current source. Read the [implementation status](/theory/what-is-karma/) and [proof criteria](/theory/adage-proving-ground/) first. Consequential AWS execution requires separate human authorization.
+
+
 # Coordinating Change in Karma
 
 Karma can accept configuration change requests — but in a system with dependencies, propagation must be coordinated carefully to maintain system integrity.
@@ -92,7 +95,7 @@ Client → karma-api: POST /request-change
 
 ## Implementation Notes
 
-- Karma can start with “just apply” mode and evolve toward full change propagation
+- Start with read-only observation and reviewable proposals; add a separately authorized execution path only after validation
 - Validation and rollback paths are key to correctness
 - A dry-run or “plan” endpoint should be available
 

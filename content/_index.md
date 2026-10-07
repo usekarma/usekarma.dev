@@ -1,79 +1,73 @@
 ---
 title: "Karma"
 weight: 1
+description: "An experimental event-driven system for understanding change, and a real workload for proving Adage's infrastructure control model."
 ---
 
 # Karma
 
-<p style="display: flex; align-items: center; gap: 0.5em;">
-  <img
-    class="theme-switch-logo"
-    src="/assets/logo/usekarma_light_300.png"
-    data-light="/assets/logo/usekarma_light_300.png"
-    data-dark="/assets/logo/usekarma_dark_300.png"
-    style="width: 128px; height: 128px;"
-    alt="UseKarma logo">
-  <span>
-    Karma is an experimental open source system for modeling and managing infrastructure as modular, object-oriented components — where each deployment step is shaped by what came before.
-  </span>
+<p style="display: flex; align-items: center; gap: 1rem;">
+  <img class="theme-switch-logo" src="/assets/logo/usekarma_light_300.png" data-light="/assets/logo/usekarma_light_300.png" data-dark="/assets/logo/usekarma_dark_300.png" style="width: 96px; height: 96px;" alt="UseKarma logo">
+  <span><b>An experimental event-driven system for understanding change—and a real workload for proving Adage's infrastructure control model.</b></span>
 </p>
 
-**Infrastructure as Consequence.**
+Karma explores how events, state, dependencies, and outcomes can make system behavior explainable. Its source includes Kafka normalization, event/action contracts, ClickHouse analysis definitions, and prototype API handlers. The goal is to turn observations into reviewable decisions and measured results.
 
-![Karma: Infrastructure as Consequence](/img/karma-system.drawio.png)
+[Explore the source](https://github.com/usekarma/karma) · [Implementation status](/theory/what-is-karma/) · [Adage architecture](https://adage.usekarma.dev/)
 
-Rather than building environments top-down, Karma encourages config-driven systems that evolve like a graph — each node connected to its lineage, and each change traceable to its origin.
+## What Karma is for
 
-> **Karma** is built on [**Adage – a configuration-driven deployment framework**](https://adage.usekarma.dev) for modular infrastructure.
+What happened? What changed? Which entities or dependencies were affected? What evidence supports the next decision?
 
----
+An event history can connect operational signals with state, latency, lineage, and proposed actions. Karma is the place to develop and test that workload. **Adage defines the infrastructure control model**: how desired state, reusable implementation, runtime discovery, environments, and controlled deployment fit together.
 
-## Why Karma?
+## What exists today
 
-- Modular, reusable infrastructure components  
-- Declarative, visual dependency graphs  
-- Object-oriented modeling across environments  
-- Persistent system graph stored in Amazon Neptune  
-- Eventually: drag-and-drop design for system composition  
+| Area | Evidence and limits |
+| --- | --- |
+| Event contracts and normalization | Schemas, mappings, and Python/Java normalization source exist. Complete producer/consumer integration still needs verification. |
+| ClickHouse analysis | Tables, materialized views, and state/latency queries exist in source. Their presence does not prove a live pipeline. |
+| Graph API prototype | Query handler returns mock graphs; logging handler prints events and has a graph insertion TODO. |
+| Prediction, deviation, and actions | Job and action examples include placeholders. These are not verified detection or execution services. |
+| Future graph platform | Persistent Neptune integration, a complete CLI/service, coordinated changes, and graph learning remain design proposals. |
 
----
+The [repository](https://github.com/usekarma/karma) is the implementation evidence. The [theory pages](/theory/) preserve the longer-term ideas and label their status. No complete end-to-end deployment or production readiness is claimed here.
 
-## What Karma Does
+## How the projects fit together
 
-Karma builds and maintains a live infrastructure graph by:
+| Part | Responsibility |
+| --- | --- |
+| [Adage](https://adage.usekarma.dev/) | Infrastructure control model, originally built around explicit and composable cloud architecture. |
+| [aws-config](https://github.com/usekarma/aws-config) | Desired instances and environment bindings. |
+| [aws-iac](https://github.com/usekarma/aws-iac) | Reusable Terraform/Terragrunt implementation. |
+| **SSM Parameter Store** | Configuration and runtime dependency bridge. |
+| **Karma** | Workload, observations, experiments, and evidence about the model's results. |
+| [Agent business solution template](https://github.com/usekarma/agent-business-solution-template) | Specifications, deterministic verification, readiness evidence, and human release decisions. |
 
-- Ingesting configuration from Git and Parameter Store  
-- Tracking runtime outputs produced by Terraform  
-- Inferring relationships and dependencies between components  
+Adage's architecture predates the current agent use case. Explicit state and predictable interfaces make it a useful substrate for agent-assisted engineering. [Read the complete Adage story](https://github.com/usekarma/adage).
 
-The graph is stored in Amazon Neptune and exposed via API — allowing other tools to explore the system, simulate changes, or request updates. Karma coordinates those changes based on the graph’s structure and dependencies.
+## Agents prepare evidence; humans authorize execution
 
----
+Agents may inspect source and AWS read-only, develop components, prepare configuration, run checks, generate plans, investigate cost/drift, and prepare pull requests. Production apply, destroy, persistent-data deletion, sensitive IAM/security changes, SSM publishing, and irreversible operations require explicit human authorization.
 
-## Beyond Infrastructure
+Agent safeguards are implemented in [aws-iac PR #1](https://github.com/usekarma/aws-iac/pull/1) and [aws-config PR #1](https://github.com/usekarma/aws-config/pull/1), currently under review. They are not Karma runtime features and are not yet default-branch infrastructure behavior.
 
-Karma’s graph-based design opens the door to runtime introspection, observability, validation pipelines, and machine learning.  
-Explore the [Data Science perspective →](/theory/data-science/)
+## A measurable infrastructure proof
 
----
+Compare **desired state vs. actual AWS state vs. actual cost**, explain the differences, and propose safe remediation without destructive changes.
 
-## See It in Action
+| Intended minimal site steady state | Exact expected target |
+| --- | ---: |
+| strall.com | $0.51/month |
+| usekarma.dev | $0.61/month |
+| **Combined** | **$1.12/month** |
 
-Want to see how Karma works in practice?  
-Check out the [Demos](/demos/) page for a full walkthrough of a real-world deployment.
+These are owner-specified targets awaiting billing proof. They describe those two sites' intended minimal state, not the full historical Karma stack or the additional Adage documentation site.
 
----
+The first experiment must attribute spend above the target to infrastructure causes, map it back to configuration/IaC where possible, and produce evidence, estimated savings, and data-loss risks. Missing coverage or unexplained charges remain visible. [Proof criteria](/theory/adage-proving-ground/) define success; complete public end-to-end proof is still pending.
 
-## Powered by Adage
+## Explore and contribute
 
-**Karma** is built on top of  [**Adage – a configuration-driven deployment framework**](https://adage.usekarma.dev) that combines Terraform, Parameter Store, and Terragrunt to manage real-world AWS infrastructure.
-
----
-
-## Status
-
-This project is in early development.  
-Follow progress on [GitHub →](https://github.com/usekarma)  
-Or dive deeper into the [core theory behind Karma →](/theory/)
+Start with the [implementation overview](/theory/what-is-karma/), [Adage's role](/theory/what-is-adage/), or the [deployment walkthrough](/demos/). For setup and commands, use the [Karma source README](https://github.com/usekarma/karma) and [Adage quickstarts](https://github.com/usekarma/adage#getting-started).
 
 {{< logo-switch-script >}}

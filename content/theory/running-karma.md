@@ -3,6 +3,9 @@ title: "How Karma Runs"
 weight: 5
 ---
 
+> **Design proposal:** This page preserves exploratory architecture ideas, not verified runtime capabilities. Persistent Neptune integration, Karma CLI/service commands, coordinated changes, and learning systems are not implemented end-to-end in the current source. Read the [implementation status](/theory/what-is-karma/) and [proof criteria](/theory/adage-proving-ground/) first. Consequential AWS execution requires separate human authorization.
+
+
 # How Karma Runs
 
 Karma is a system for managing infrastructure through configuration and runtime state — but how it actually runs can vary.

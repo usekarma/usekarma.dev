@@ -3,6 +3,9 @@ title: "Next Steps"
 weight: 99
 ---
 
+> **Design proposal:** This page preserves exploratory architecture ideas, not verified runtime capabilities. Persistent Neptune integration, Karma CLI/service commands, coordinated changes, and learning systems are not implemented end-to-end in the current source. Read the [implementation status](/theory/what-is-karma/) and [proof criteria](/theory/adage-proving-ground/) first. Consequential AWS execution requires separate human authorization.
+
+
 # Next Steps
 
 <p style="display: flex; align-items: center; gap: 0.5em;">
@@ -67,19 +70,11 @@ Planned features:
 
 ---
 
-## Developer Onboarding
+## Developer onboarding
 
-Fast path to contributing:
+Start with the [source README](https://github.com/usekarma/karma) and component-specific instructions. The current repository has no root Poetry project or finished Karma CLI. Validate one synthetic normalized event through a ClickHouse query before claiming pipeline integration.
 
-```bash
-git clone https://github.com/usekarma/karma.git
-cd karma
-poetry install
-poetry run pytest
-```
-
-- Requires Python 3.10+ and AWS credentials
-- TODO: Add directory structure overview and contribution guide
+The immediate infrastructure objective is the [read-only cost proof](/theory/adage-proving-ground/), with separate human authorization for any later changes.
 
 ---
 
